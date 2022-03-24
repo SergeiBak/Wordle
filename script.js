@@ -15299,9 +15299,14 @@ const guessGrid = document.querySelector("[data-guess-grid]")
 const offsetFromDate = new Date(2022, 0, 1)
 const msOffset = Date.now() - offsetFromDate
 const dayOffset = msOffset / 1000 / 60 / 60 / 24 // millisecond value to day value
-const targetWord = targetWords[Math.floor(dayOffset)]
+var targetWord = targetWords[Math.floor(dayOffset)]
 
-startInteraction()
+startGame()
+
+function startGame() {
+    targetWord = targetWords[Math.floor(Math.random() * targetWords.length)]
+    startInteraction()
+}
 
 function startInteraction() {
     document.addEventListener("click", handleMouseClick)
@@ -15480,7 +15485,7 @@ function checkWinLose(guess, tiles) {
     const remainingTiles = guessGrid.querySelectorAll(":not([data-letter])")
     if (remainingTiles.length === 0)
     {
-        showAlert(targetWord.toUpperCase(), null)
+        showAlert("You Lost! The word was: " + targetWord.toUpperCase(), null)
         stopInteraction()
     }
 }
