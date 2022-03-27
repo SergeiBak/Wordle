@@ -15,7 +15,7 @@ This project is a recreation of the classic guessing game known as Wordle, which
 Wordle consists of six 5-letter rows in which player's can enter their guesses. The goal of the game is to guess the secret word to win! A correct letter in the correct position will be outlined in green, a correct letter in the wrong position will be outlined in yellow, and a incorrect letter will be grayed out.    
 
 ## Test The Project!
-In order to play this version of Wordle, follow the [link](https://sergeibak.github.io/Wordle/) to a in-browser build (No download required!).
+In order to play this version of Wordle, follow the [link](https://sergeibak.github.io/PersonalWebsite/wordle.html) to a in-browser build (No download required!).
 
 ## Code
 A brief description of all of the files is as follows:
