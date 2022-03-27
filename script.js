@@ -15294,8 +15294,12 @@ const WORD_LENGTH = 5
 const FLIP_ANIMATION_DURATION = 500
 const DANCE_ANIMATION_DURATION = 500
 const keyboard = document.querySelector("[data-keyboard]")
+const allKeys = keyboard.querySelectorAll('.key')
 const alertContainer = document.querySelector("[data-alert-container]")
+const restartButtonElement = document.getElementById('restartElement')
+const restartButton = document.getElementById('restartButton')
 const guessGrid = document.querySelector("[data-guess-grid]")
+const allTiles = guessGrid.querySelectorAll('.tile')
 const offsetFromDate = new Date(2022, 0, 1)
 const msOffset = Date.now() - offsetFromDate
 const dayOffset = msOffset / 1000 / 60 / 60 / 24 // millisecond value to day value
@@ -15303,8 +15307,29 @@ var targetWord = targetWords[Math.floor(dayOffset)]
 
 startGame()
 
+restartButton.addEventListener('click', startGame)
+
 function startGame() {
+  allTiles.forEach(tile => {
+    tile.textContent = ""
+    delete tile.dataset.state
+    delete tile.dataset.letter
+  })
+
+  allKeys.forEach(key => {
+    key.classList.remove('wrong')
+    key.classList.remove('wrong-location')
+    key.classList.remove('correct')
+  })
+
+  var allAlerts = alertContainer.querySelectorAll('.alert')
+  allAlerts.forEach(alert => {
+    alert.remove()
+  })
+
     targetWord = targetWords[Math.floor(Math.random() * targetWords.length)]
+    restartButtonElement.classList.remove('show')
+
     startInteraction()
 }
 
@@ -15479,6 +15504,7 @@ function checkWinLose(guess, tiles) {
         showAlert("You Win!", 5000)
         danceTiles(tiles)
         stopInteraction()
+        restartButtonElement.classList.add('show')
         return
     }
 
@@ -15486,6 +15512,7 @@ function checkWinLose(guess, tiles) {
     if (remainingTiles.length === 0)
     {
         showAlert("You Lost! The word was: " + targetWord.toUpperCase(), null)
+        restartButtonElement.classList.add('show')
         stopInteraction()
     }
 }
